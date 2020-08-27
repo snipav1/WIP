@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import requests
 import argparse
 import sys
@@ -22,7 +24,6 @@ def print_location(geo_response, city):
         print(colored('-------------------------', 'red'))
         print('Country: ', colored(geo_response['country'], 'red'))
         print('Country Code: ', colored(geo_response['countryCode'], 'red'))
-        print('Region: ', colored(geo_response['region'], 'red'))
         print('Region Name: ', colored(geo_response['regionName'], 'red'))
         print('City: ', colored(geo_response['city'], 'red'))
         print('ISP: ', colored(geo_response['isp'], 'red'))
@@ -33,7 +34,6 @@ def print_location(geo_response, city):
         print(colored('---------------------', 'green'))
         print('Country: ', colored(geo_response['country'], 'green'))
         print('Country Code: ', colored(geo_response['countryCode'], 'green'))
-        print('Region: ', colored(geo_response['region'], 'green'))
         print('Region Name: ', colored(geo_response['regionName'], 'green'))
         print('City: ', colored(geo_response['city'], 'green'))
         print('ISP: ', colored(geo_response['isp'], 'green'))
