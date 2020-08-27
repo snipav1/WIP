@@ -17,23 +17,23 @@ def get_ip(response):
     return response['ip']
 
 
-def print_location(geo_response, city):
+def print_location(geo_response, city, ip_address):
     if geo_response['city'].lower() == city.lower():
-        print(colored('-------------------------', 'red'))
+        print(colored('------------------------', 'red'))
         print(colored('[*] NOT Connected to VPN', 'red'))
-        print(colored('-------------------------', 'red'))
+        print(colored('------------------------', 'red'))
+        print('IP Address: ', colored(ip_address, 'red'))
         print('Country: ', colored(geo_response['country'], 'red'))
-        print('Country Code: ', colored(geo_response['countryCode'], 'red'))
         print('Region Name: ', colored(geo_response['regionName'], 'red'))
         print('City: ', colored(geo_response['city'], 'red'))
         print('ISP: ', colored(geo_response['isp'], 'red'))
         print('Org: ', colored(geo_response['org'], 'red'))
     else:
-        print(colored('---------------------', 'green'))
+        print(colored('--------------------', 'green'))
         print(colored('[.] Connected to VPN', 'green'))
-        print(colored('---------------------', 'green'))
+        print(colored('--------------------', 'green'))
+        print('IP Address: ', colored(ip_address, 'green'))
         print('Country: ', colored(geo_response['country'], 'green'))
-        print('Country Code: ', colored(geo_response['countryCode'], 'green'))
         print('Region Name: ', colored(geo_response['regionName'], 'green'))
         print('City: ', colored(geo_response['city'], 'green'))
         print('ISP: ', colored(geo_response['isp'], 'green'))
@@ -52,7 +52,7 @@ def main(home_city=home_city):
     geo_response = requests.get('http://ip-api.com/json/{}'.format
                                 (ip_address)).json()
 
-    print_location(geo_response, home_city)
+    print_location(geo_response, home_city, ip_address)
 
 
 if __name__ == '__main__':
