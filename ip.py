@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 
-import requests
 import argparse
 import sys
+
+import requests
 from termcolor import colored
 
 parser = argparse.ArgumentParser()
@@ -13,11 +14,22 @@ parser.add_argument("-c", "--city",
 args = parser.parse_args()
 home_city = args.home_city if args.home_city else None
 
+
 def get_ip(response):
+    """get_ip.
+
+    :param response:
+    """
     return response['ip']
 
 
 def print_location(geo_response, city, ip_address):
+    """print_location.
+
+    :param geo_response:
+    :param city:
+    :param ip_address:
+    """
     if geo_response['city'].lower() == city.lower():
         print(colored('------------------------', 'red'))
         print(colored('[*] NOT Connected to VPN', 'red'))
@@ -41,6 +53,10 @@ def print_location(geo_response, city, ip_address):
 
 
 def main(home_city=home_city):
+    """main.
+
+    :param home_city:
+    """
     if not home_city:
         print(parser.print_help())
         sys.exit('[!] Please provide a city\n')
