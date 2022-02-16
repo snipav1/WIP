@@ -7,12 +7,12 @@ import requests
 from termcolor import colored
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-c", "--city",
-                    dest="home_city",
-                    help="Set home city",
+parser.add_argument("-p", "--provider",
+                    dest="provider",
+                    help="Set internet service provider",
                     action='store')
 args = parser.parse_args()
-home_city = args.home_city if args.home_city else None
+provider = args.provider if args.provider else None
 
 
 def get_ip(response):
@@ -23,14 +23,14 @@ def get_ip(response):
     return response['ip']
 
 
-def print_location(geo_response, city, ip_address):
+def print_location(geo_response, provider, ip_address):
     """print_location.
 
     :param geo_response:
-    :param city:
+    :param provider:
     :param ip_address:
     """
-    if geo_response['city'].lower() == city.lower():
+    if provider.lower() in geo_response['isp'].lower():
         print(colored('------------------------', 'red'))
         print(colored('[*] NOT Connected to VPN', 'red'))
         print(colored('------------------------', 'red'))
@@ -52,14 +52,14 @@ def print_location(geo_response, city, ip_address):
         print('Org: ', colored(geo_response['org'], 'green'))
 
 
-def main(home_city=home_city):
+def main(provider=provider):
     """main.
 
-    :param home_city:
+    :param provider:
     """
-    if not home_city:
+    if not provider:
         print(parser.print_help())
-        sys.exit('[!] Please provide a city\n')
+        sys.exit('[!] Please provide a provider\n')
 
     ip_response = requests.get('https://api.myip.com').json()
 
@@ -68,8 +68,8 @@ def main(home_city=home_city):
     geo_response = requests.get('http://ip-api.com/json/{}'.format
                                 (ip_address)).json()
 
-    print_location(geo_response, home_city, ip_address)
+    print_location(geo_response, provider, ip_address)
 
 
 if __name__ == '__main__':
-    main(home_city=home_city)
+    main(provider=provider)
