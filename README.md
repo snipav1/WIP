@@ -9,8 +9,8 @@ Setup:
 
 Usage:
 
-    - Run ip.py script by setting home city. ie: Austin, Dallas, Houston
-	python3 ip.py -c Austin
+    - Run ip.py script by setting ISP provider. ie: at&t, comcast
+	python3 ip.py -p "at&t"
       
 Optional:
 
@@ -18,5 +18,5 @@ Very useful if a bash alias is created
     
 Modify .bashrc file with something like these Examples:
     
-    alias wip='python3 /<path>/ip.py -c Austin'
+    alias wip='python3 /<path>/ip.py -p "at&t"'
 
